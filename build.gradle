@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'scala'
+}
+
+repositories {
+    mavenCentral()
+}
+
+application {
+    mainClassName = 'Launcher'
+}
+
+
+dependencies {
+    compile group: 'com.typesafe.akka', name: "akka-actor_2.13", version: '2.6.8'
+    compile group: 'com.typesafe.akka', name: "akka-cluster-typed_2.13", version: '2.6.8'
+    compile group: 'com.typesafe.akka', name: "akka-cluster-tools_2.13", version: '2.6.8'
+}
