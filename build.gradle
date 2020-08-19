@@ -12,9 +12,9 @@ application {
     mainClassName = 'Launcher'
 }
 
-
 dependencies {
-    compile group: 'com.typesafe.akka', name: "akka-actor_2.13", version: '2.6.8'
-    compile group: 'com.typesafe.akka', name: "akka-cluster-typed_2.13", version: '2.6.8'
-    compile group: 'com.typesafe.akka', name: "akka-cluster-tools_2.13", version: '2.6.8'
+    implementation 'org.scala-lang:scala-library:2.12.8'
+    compile group: 'com.typesafe.akka', name: "akka-actor_2.12", version: '2.5.23'
+    compile group: 'com.typesafe.akka', name: "akka-cluster-typed_2.12", version: '2.5.23'
+    compile group: 'com.typesafe.akka', name: "akka-cluster-tools_2.12", version: '2.5.23'
 }
