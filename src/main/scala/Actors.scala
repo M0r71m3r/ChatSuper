@@ -1,5 +1,8 @@
 import akka.actor.{Actor, ActorLogging}
 import akka.cluster.Cluster
+import javafx.fxml.FXMLLoader
+import javafx.scene.{Parent, Scene}
+import javafx.stage.{Modality, Stage}
 
 case class Message(content: String)
 case class PrivateMessage(content: String, target: String)
@@ -37,7 +40,8 @@ class BoxActor(controllerImpl: ControllerImpl) extends Actor with ActorLogging {
     case payload: PrivateMessage =>
       var token = Array[String]()
       token = payload.target.split('/')
-      if (token(0) == controllerImpl.nickName.getText())
+      if (token(0) == controllerImpl.nickName.getText()) {
         controllerImpl.chatArea.setText(controllerImpl.chatArea.getText() + payload.content + "\n")
+      }
   }
 }
