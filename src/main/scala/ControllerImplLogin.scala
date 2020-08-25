@@ -1,6 +1,6 @@
-import java.net.{InetAddress, URL}
+import java.net.{InetAddress, NetworkInterface, URL}
 import java.util.ResourceBundle
-
+import scala.collection.JavaConversions._
 import javafx.event.ActionEvent
 import javafx.fxml.FXMLLoader
 import javafx.scene.{Parent, Scene}
@@ -24,8 +24,12 @@ class ControllerImplLogin() extends ControllerLogin {
       val primaryStage = new Stage()
       val controller = fxmlLoader.getController[ControllerImpl]
 
+      val interfaces = NetworkInterface.getNetworkInterfaces
+      val inetAddresses = interfaces.flatMap(interface => interface.getInetAddresses)
+      val ip = inetAddresses.find(_.isSiteLocalAddress).map(_.getHostAddress).get
+
       controller.nickName.setText(loginNickField.getText)
-      controller.init(if (loginHost.getText.isEmpty) InetAddress.getLocalHost.getHostAddress else loginHost.getText, loginPort.getText)
+      controller.init(if (loginHost.getText.isEmpty) ip else loginHost.getText, loginPort.getText)
 
       primaryStage.initModality(Modality.WINDOW_MODAL)
       primaryStage.setTitle("Chat")

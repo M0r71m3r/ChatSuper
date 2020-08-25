@@ -1,5 +1,5 @@
-import java.net.InetAddress
-
+import java.net.{InetAddress, NetworkInterface}
+import scala.collection.JavaConversions._
 import akka.actor.{ActorRef, ActorSystem, Props}
 import com.typesafe.config.ConfigFactory
 import javafx.application.Platform
@@ -30,11 +30,14 @@ class ControllerImpl() extends Controller {
     chatArea.setEditable(false) //No change, just copy
     nickName.setEditable(false) //No change, just copy
 
+    val interfaces = NetworkInterface.getNetworkInterfaces
+    val inetAddresses = interfaces.flatMap(interface => interface.getInetAddresses)
+    val ip = inetAddresses.find(_.isSiteLocalAddress).map(_.getHostAddress).get
 
     if (!tcpPort.equals("")) {
       val conf: String = "akka.remote.netty.tcp.port = " + tcpPort + "," +
-        "akka.remote.netty.tcp.hostname = " + InetAddress.getLocalHost.getHostAddress + "," +
-        "akka.cluster.seed-nodes = [\"akka.tcp://system@" + tcpHost + ":" + "2550" + "\"]," +
+        "akka.remote.netty.tcp.hostname = " + ip + "," +
+        "akka.cluster.seed-nodes = [\"akka.tcp://system@" + ip + ":" + "2550" + "\", \"akka.tcp://system@" + tcpHost + ":" + tcpPort + "\"]," +
         "akka.actor.provider = \"cluster\""
       system = ActorSystem("system", ConfigFactory.parseString(conf))
 
