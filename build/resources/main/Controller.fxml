@@ -16,11 +16,7 @@
 
             <Button fx:id="sendBtn" layoutX="313.0" layoutY="14.0" mnemonicParsing="false" onAction="#sendMessage" text="Send" />
 
-            <TextArea fx:id="nickName" layoutX="14.0" layoutY="54.0" prefHeight="39.0" prefWidth="128.0" text="Anon" wrapText="true" />
-
-            <Button fx:id="changeNick" layoutX="142.0" layoutY="92.0" mnemonicParsing="false" onAction="#sendNick" text="Change Nick" />
-
-            <TextField fx:id="nickField" layoutX="14.0" layoutY="92.0" prefHeight="25.0" prefWidth="128.0" />
+            <TextArea fx:id="nickName" layoutX="14.0" layoutY="54.0" prefHeight="39.0" prefWidth="128.0" wrapText="true" />
 
          </children>
       </Pane>

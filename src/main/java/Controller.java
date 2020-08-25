@@ -22,13 +22,7 @@ abstract class Controller implements Initializable {
     protected TextArea nickName;
 
     @FXML
-    protected Button changeNick;
-
-    @FXML
     protected TextField nickField;
-
-    @FXML
-    abstract void sendNick(ActionEvent event);
 
     @FXML
     abstract void sendMessage(ActionEvent event);
